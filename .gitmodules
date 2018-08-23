@@ -1,0 +1,9 @@
+[submodule "lib/closure"]
+	path = lib/closure
+	url = https://github.com/back2dos/closure.git
+[submodule "lib/mithril-hx"]
+	path = lib/mithril-hx
+	url = https://github.com/ciscoheat/mithril-hx.git
+[submodule "lib/haxe-redux"]
+	path = lib/haxe-redux
+	url = https://github.com/elsassph/haxe-redux.git
