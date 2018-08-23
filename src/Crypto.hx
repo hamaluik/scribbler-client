@@ -5,6 +5,18 @@ import js.html.TextDecoder;
 import js.Promise;
 import js.Browser;
 
+enum CryptoResult {
+    Ok;
+    NotLoaded;
+    NoSalt;
+    NoKey;
+}
+
+enum KeyResult {
+    Ok(server_key:Base64String);
+    Error(result:CryptoResult);
+}
+
 enum CipherResult {
     Ok(cipher_text:Uint8Array, nonce:Uint8Array);
     Error(result:CryptoResult);
@@ -13,13 +25,6 @@ enum CipherResult {
 enum DecipherResult {
     Ok(result:String);
     Error(result:CryptoResult);
-}
-
-enum CryptoResult {
-    Ok;
-    NotLoaded;
-    NoSalt;
-    NoKey;
 }
 
 class Crypto {
@@ -51,11 +56,13 @@ class Crypto {
         return CryptoResult.Ok;
     }
 
-    public static function calculate_key(pw:String):CryptoResult {
-        if(sodium == null) return CryptoResult.NotLoaded;
-        if(salt == null) return CryptoResult.NoSalt;
-        Crypto.key = sodium.crypto_pwhash(sodium.crypto_secretbox_KEYBYTES, encoder.encode(pw), salt, sodium.crypto_pwhash_OPSLIMIT_INTERACTIVE, sodium.crypto_pwhash_MEMLIMIT_INTERACTIVE, sodium.crypto_pwhash_ALG_DEFAULT);
-        return CryptoResult.Ok;
+    public static function calculate_key(pw:String):KeyResult {
+        if(sodium == null) return KeyResult.Error(CryptoResult.NotLoaded);
+        if(salt == null) return KeyResult.Error(CryptoResult.NoSalt);
+        var full_key:Uint8Array = sodium.crypto_pwhash(sodium.crypto_secretbox_KEYBYTES * 2, encoder.encode(pw), salt, sodium.crypto_pwhash_OPSLIMIT_INTERACTIVE, sodium.crypto_pwhash_MEMLIMIT_INTERACTIVE, sodium.crypto_pwhash_ALG_DEFAULT);
+        Crypto.key = full_key.subarray(0, sodium.crypto_secretbox_KEYBYTES);
+        var server_key:Uint8Array = full_key.subarray(sodium.crypto_secretbox_KEYBYTES);
+        return KeyResult.Ok(server_key);
     }
 
     public static function encrypt(message:String):CipherResult {

@@ -1,3 +1,4 @@
+import Crypto.KeyResult;
 import Crypto.CryptoResult;
 import js.html.Uint8Array;
 import Crypto.CipherResult;
@@ -14,8 +15,12 @@ class Main {
             Crypto._generate_salt();
             Browser.console.log("Calculating key...");
             switch(Crypto.calculate_key("my very good password")) {
-                case CryptoResult.Ok:{}
-                default: Browser.console.log("Failed to calculate key!");
+                case KeyResult.Ok(server_key): {
+                    Browser.console.log("Signing in with key", server_key);
+                }
+                case KeyResult.Error(err): {
+                    Browser.console.warn("Failed to generate key", err);
+                }
             }
 
             Browser.console.log("Encrypting...");
