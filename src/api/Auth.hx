@@ -71,7 +71,7 @@ class Auth {
     static function stop_refresh():Void {
         refresh_timer.stop();
         refresh_timer = null;
-        App.console.debug("sign in refresh cancelled!");
+        App.console.info("sign in refresh cancelled!");
     }
 
     static function refresh_token():Void {
@@ -81,7 +81,6 @@ class Auth {
             return;
         }
 
-        App.console.debug("refreshing sign in...");
         var token:String = switch(App.store.getState().auth.token) {
             case Some(t): t;
             case None: { stop_refresh(); return; }
@@ -142,7 +141,6 @@ class Auth {
                     }
                 });
             }).then(function(_) {
-                App.console.debug("Sign up successful!");
                 App.store.dispatch(AuthActions.SignUp);
                 resolve({});
             })
