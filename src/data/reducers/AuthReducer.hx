@@ -1,5 +1,6 @@
 package data.reducers;
 
+import api.Auth;
 import data.actions.AuthActions;
 import data.state.AuthState;
 
@@ -25,7 +26,16 @@ class AuthReducer implements redux.IReducer<AuthActions, AuthState> {
                 };
                 js.Object.assign(blank, state, newState);
             }
+
+            case AuthActions.Refresh(token): {
+                var newState = {
+                    token: Option.Some(token)
+                };
+                js.Object.assign(blank, state, newState);
+            }
+
             case AuthActions.SignOut: {
+                Auth.stop_refresh();
                 var newState = {
                     token: Option.None
                 };

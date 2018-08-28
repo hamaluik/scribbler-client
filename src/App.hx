@@ -102,6 +102,14 @@ class App {
                 });
                 workerResolvers.remove(payload.id);
             }
+
+            case AppMessage.GeneratedKey: {
+                var resolvers = workerResolvers.get(payload.id);
+                resolvers.resolve({
+                    server_key: cast(payload.data.server_key, Uint8Array)
+                });
+                workerResolvers.remove(payload.id);
+            }
         }
     }
 }
