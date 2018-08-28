@@ -4,6 +4,7 @@ $primary: #3c989e
 $secondary: #ed5277
 $link: darken($secondary, 25%)
 $link-hover: $secondary
+$gap: 0px
 
 @import "bulma.sass"
 @import "pace.scss"
@@ -25,8 +26,9 @@ html, body
 body
     font-family: 'Raleway', sans-serif
 
-h1, h2, h3, h4, h5, h6
-    font-family: 'Indie Flower', cursive
+.hero
+    h1, h2, h3, h4, h5, h6
+        font-family: 'Indie Flower', cursive
 
 section.is-fullheight
     min-height: 100vh

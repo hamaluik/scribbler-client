@@ -75,10 +75,12 @@ Eiusmod aliqua nulla cupidatat esse in cillum proident consectetur aliquip conse
 ");
 
         return [
-            m('section.is-fullheight.columns', [
-                m('.column.is-one-quarter', "I am the left column"),
-                m('.column.content', [
-                    M.trust(rendered_html)
+            m('section.is-fullheight', [
+                m('.container.columns', [
+                    m('.column.is-one-quarter', "I am the left column"),
+                    m('.column.content', [
+                        M.trust(rendered_html)
+                    ])
                 ])
             ]),
             m('footer', [
