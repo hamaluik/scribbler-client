@@ -1,5 +1,6 @@
 package api;
 
+import data.actions.AuthActions;
 import js.html.Uint8Array;
 import mithril.M;
 
@@ -70,6 +71,7 @@ class Auth {
                 });
             }).then(function(_) {
                 App.console.debug("Sign up successful!");
+                App.store.dispatch(AuthActions.SignUp);
                 resolve({});
             })
             .catchError(function(err:Dynamic) {

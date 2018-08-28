@@ -47,6 +47,11 @@ class SignIn implements Mithril {
     }
 
     public function render(vnode: Vnode<SignIn>): Vnodes {
+        var signup_display:Vnodes = if(App.store.getState().auth.signed_up) {
+            m('.notification', "You've successfully signed up! You can now sign in with the name and password you supplied previously.");
+        }
+        else null;
+
         var error_display:Vnodes = switch(error_msg) {
             case Some(msg): m('.notification.is-warning', [
                 m('button.delete', {
@@ -73,6 +78,7 @@ class SignIn implements Mithril {
                                         action: "#"
                                     }, [
                                         m('h1', 'Scribbler: Sign In'),
+                                        signup_display,
                                         m('.field', [
                                             m('label.label', 'Name'),
                                             m(TextField, {
