@@ -31,7 +31,6 @@ class App {
         var scriptPath = cast(Browser.document.currentScript, ScriptElement).src;
         worker = new Worker(scriptPath);
         worker.onmessage = onMessageFromWorker;
-        console.debug("initialized worker", worker);
 
         // initialize the data store
         store = data.state.AppState.AppStateTools.initialize();
@@ -39,10 +38,10 @@ class App {
         // and get the API setting...
         api.API.getRoot()
             .then(function(_) {
-                App.console.log("API request success, root:", store.getState().api.root);
+                App.console.info("api root:", store.getState().api.root);
             })
             .catchError(function(err:Dynamic) {
-                App.console.error("Failed to get API root:", err);
+                App.console.error("failed to get API root:", err);
             });
 
         // and initialize routing...
@@ -61,21 +60,17 @@ class App {
             message: message,
             data: data
         };
-        console.debug("setting up post message with payload", payload);
         return new Promise(function(resolve:Dynamic->Void, reject:String->Void):Void {
             workerResolvers.set(id, {
                 resolve: resolve,
                 reject: reject
             });
-            console.debug("posting payload", payload);
             worker.postMessage(payload);
-            console.debug("posted message with resolvers", workerResolvers.get(id));
         });
     }
 
     static function onMessageFromWorker(e:MessageEvent) {
 		var payload:AppPayload = e.data;
-        console.debug("received message from worker", payload);
 		switch(payload.message) {
             case AppMessage.Info: {
                 console.info(payload.data);
@@ -98,6 +93,14 @@ class App {
                 var resolvers = workerResolvers.get(payload.id);
                 resolvers.resolve({
                     salt: cast(payload.data.salt, Uint8Array),
+                    server_key: cast(payload.data.server_key, Uint8Array)
+                });
+                workerResolvers.remove(payload.id);
+            }
+
+            case AppMessage.GeneratedKey: {
+                var resolvers = workerResolvers.get(payload.id);
+                resolvers.resolve({
                     server_key: cast(payload.data.server_key, Uint8Array)
                 });
                 workerResolvers.remove(payload.id);

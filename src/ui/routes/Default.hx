@@ -10,7 +10,7 @@ class Default implements Mithril {
         return null;
     }
 
-    public function render(vnode): Vnodes {
-        return vnode;
+    public function render(vnode: Vnode<Default>): Vnodes {
+        return m('p', 'You signed in!');
     }
 }

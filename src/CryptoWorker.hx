@@ -86,6 +86,32 @@ class CryptoWorker {
 					server_key.buffer
 				]);
 			}
+
+			case WorkerMessage.GenerateKey: {
+				var salt:Base64String = payload.data.salt;
+				var server_key:Uint8Array = switch(Crypto.calculate_key('${payload.data.name}:${payload.data.password}', salt.to_bytes())) {
+					case Ok(key): key;
+					case Err(e): {
+						workerScope.postMessage({
+							id: payload.id,
+							message: AppMessage.Error,
+							data: "failed to generate key"
+						});
+						return;
+					}
+				};
+
+				// return!
+				workerScope.postMessage({
+					id: payload.id,
+					message: AppMessage.GeneratedKey,
+					data: {
+						server_key: server_key
+					}
+				}, [
+					server_key.buffer
+				]);
+			}
 		}
 	}
 }
