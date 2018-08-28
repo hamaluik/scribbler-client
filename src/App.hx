@@ -11,16 +11,14 @@ class App {
     public static var store:Store<AppState>;
 
     public static function main() {
-        // if we are the web worker, move over there!
-        if(try Browser.document == null catch (e:Dynamic) true) {
-            Worker.init();
-            return;
-        }
-
-        // initialize the web worker
-        var scriptPath = cast(Browser.document.currentScript, ScriptElement).src;
-        var worker = new js.html.Worker(scriptPath);
-        worker.onmessage = onMessageFromWorker;
+        // initialize crypto
+        Crypto.init()
+            .then(function(_) {
+                console.info("sodium initialized!");
+            })
+            .catchError(function(err) {
+                console.error("failed to initialize sodium", err);
+            });
 
         // initialize the data store
         store = data.state.AppState.AppStateTools.initialize();
@@ -40,9 +38,5 @@ class App {
             '/signin': new ui.routes.SignIn(),
             '/signup': new ui.routes.SignUp(),
         });
-    }
-
-    static function onMessageFromWorker(e:MessageEvent) {
-        
     }
 }

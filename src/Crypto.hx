@@ -5,26 +5,10 @@ import js.html.TextDecoder;
 import js.Promise;
 import js.Browser;
 
-enum CryptoResult {
-    Ok;
+enum CryptoError {
     NotLoaded;
     NoSalt;
     NoKey;
-}
-
-enum KeyResult {
-    Ok(server_key:Base64String);
-    Error(result:CryptoResult);
-}
-
-enum CipherResult {
-    Ok(cipher_text:Uint8Array, nonce:Uint8Array);
-    Error(result:CryptoResult);
-}
-
-enum DecipherResult {
-    Ok(result:String);
-    Error(result:CryptoResult);
 }
 
 class Crypto {
@@ -50,32 +34,37 @@ class Crypto {
         Crypto.salt = salt.to_bytes();
     }
 
-    public static function _generate_salt():CryptoResult {
-        if(sodium == null) return CryptoResult.NotLoaded;
+    public static function generate_salt():Result<Uint8Array, CryptoError> {
+        if(sodium == null) return Err(NotLoaded);
         Crypto.salt = sodium.randombytes_buf(sodium.crypto_pwhash_SALTBYTES);
-        return CryptoResult.Ok;
+        return Ok(Crypto.salt);
     }
 
-    public static function calculate_key(pw:String):KeyResult {
-        if(sodium == null) return KeyResult.Error(CryptoResult.NotLoaded);
-        if(salt == null) return KeyResult.Error(CryptoResult.NoSalt);
+    /**
+       Derive an encryption key and server key from a supplied password, storing the encryption key for later use
+       @param pw The password to derive from
+       @return Result<Uint8Array, CryptoError>
+    */
+    public static function calculate_key(pw:String):Result<Uint8Array, CryptoError> {
+        if(sodium == null) return Err(NotLoaded);
+        if(salt == null) return Err(NoSalt);
         var full_key:Uint8Array = sodium.crypto_pwhash(sodium.crypto_secretbox_KEYBYTES * 2, encoder.encode(pw), salt, sodium.crypto_pwhash_OPSLIMIT_INTERACTIVE, sodium.crypto_pwhash_MEMLIMIT_INTERACTIVE, sodium.crypto_pwhash_ALG_DEFAULT);
         Crypto.key = full_key.subarray(0, sodium.crypto_secretbox_KEYBYTES);
         var server_key:Uint8Array = full_key.subarray(sodium.crypto_secretbox_KEYBYTES);
-        return KeyResult.Ok(server_key);
+        return Ok(server_key);
     }
 
-    public static function encrypt(message:String):CipherResult {
-        if(sodium == null) return CipherResult.Error(CryptoResult.NotLoaded);
-        if(key == null) return CipherResult.Error(CryptoResult.NoKey);
+    public static function encrypt(message:String):Result<{cipher_text:Uint8Array, nonce:Uint8Array}, CryptoError> {
+        if(sodium == null) return Err(NotLoaded);
+        if(key == null) return Err(NoKey);
         var nonce:Uint8Array = sodium.randombytes_buf(sodium.crypto_secretbox_NONCEBYTES);
         var cipher_text:Uint8Array = sodium.crypto_secretbox_easy(encoder.encode(message), nonce, key);
-        return CipherResult.Ok(cipher_text, nonce);
+        return Ok({cipher_text: cipher_text, nonce: nonce});
     }
 
-    public static function decrypt(cipher_text:Uint8Array, nonce:Uint8Array):DecipherResult {
-        if(sodium == null) return DecipherResult.Error(CryptoResult.NotLoaded);
-        if(key == null) return DecipherResult.Error(CryptoResult.NoKey);
-        return DecipherResult.Ok(decoder.decode(sodium.crypto_secretbox_open_easy(cipher_text, nonce, key)));
+    public static function decrypt(cipher_text:Uint8Array, nonce:Uint8Array):Result<String, CryptoError> {
+        if(sodium == null) return Err(NotLoaded);
+        if(key == null) return Err(NoKey);
+        return Ok(decoder.decode(sodium.crypto_secretbox_open_easy(cipher_text, nonce, key)));
     }
 }
