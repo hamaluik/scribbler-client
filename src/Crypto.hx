@@ -19,14 +19,16 @@ class Crypto {
     static var salt:Uint8Array;
     static var key:Uint8Array;
 
-    public static function init():Promise<{}> {
+    public static function init(root:Dynamic):Promise<{}> {
         return new Promise<{}>(function(resolve:{}->Void, reject:Dynamic->Void):Void {
-            Reflect.setField(Browser.window, "sodium", {
+            /*Reflect.setField(Browser.window, "sodium", {
                 onload: function(sodium:Sodium) {
                     Crypto.sodium = sodium;
                     resolve({});
                 }
-            });
+            });*/
+            Crypto.sodium = root.sodium;
+            resolve({});
         });
     }
 

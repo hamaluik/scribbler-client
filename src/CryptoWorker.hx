@@ -13,8 +13,11 @@ class CryptoWorker {
 		// Setup the worker message handler:
 		workerScope.onmessage = onMessageFromParent;
 
+		// load sodium
+		workerScope.importScripts('sodium.js');
+
 		// initialize the crypto
-		Crypto.init()
+		Crypto.init(workerScope)
 			.then(function(_) {
 				initialized = true;
 				workerScope.postMessage({
