@@ -5,7 +5,7 @@ import bulma.forms.TextField;
 
 class SignUp implements Mithril {
 
-    var name:Ref<String> = "";
+    var signup_name:Ref<String> = "";
     var pass1:Ref<String> = "";
     var pass2:Ref<String> = "";
     var reg_key:Ref<String> = "";
@@ -14,7 +14,7 @@ class SignUp implements Mithril {
     var error_msg:Option<String> = None;
 
     @:allow(App) private function new() {
-        name.onChanged = Some(function(_) {
+        signup_name.onChanged = Some(function(_) {
             error_msg = None;
         });
         pass1.onChanged = Some(function(_) {
@@ -44,20 +44,17 @@ class SignUp implements Mithril {
 
         signing_up = true;
         M.redraw();
-        // TODO: call API signUp function
-        /*api.Auth.signIn(name.value, pass.value)
+        api.Auth.signUp(signup_name.value, pass1.value, reg_key)
             .then(function(_) {
                 signing_up = false;
-                M.routeSet("/");
+                M.routeSet("/signin");
             })
             .catchError(function(err) {
                 js.Browser.console.error(err);
                 signing_up = false;
-                error_msg = Some("Unrecognized name and/or password!");
+                error_msg = Some("Unauthorized.");
                 M.redraw();
-            })
-            .then(function(_) {
-            });*/
+            });
     }
 
     public function render(vnode: Vnode<SignIn>): Vnodes {
@@ -83,7 +80,7 @@ class SignUp implements Mithril {
                             m('.column.is-one-third', [
                                 m('.box.content', [
                                     m("form", {
-                                        onsubmit: SignUp,
+                                        onsubmit: signUp,
                                         action: "#"
                                     }, [
                                         m('h1', 'Scribbler: Sign Up'),
@@ -92,7 +89,7 @@ class SignUp implements Mithril {
                                             m(TextField, {
                                                 type: 'text',
                                                 icon_left: 'user-tag',
-                                                value: name,
+                                                value: signup_name,
                                                 placeholder: 'Bob'
                                             })
                                         ]),
