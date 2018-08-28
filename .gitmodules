@@ -7,3 +7,6 @@
 [submodule "lib/haxe-redux"]
 	path = lib/haxe-redux
 	url = https://github.com/elsassph/haxe-redux.git
+[submodule "lib/bulma"]
+	path = lib/bulma
+	url = https://github.com/jgthms/bulma.git

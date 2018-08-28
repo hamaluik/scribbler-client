@@ -1,10 +1,10 @@
 -cp src
--main Main
+-main App
 
 # libraries
 # note: using as submodules for better versioning
 -cp lib/mithril-hx/src
--cp lib/haxe-redux/src
+-cp lib/haxe-redux
 
 -D redux_global
 
