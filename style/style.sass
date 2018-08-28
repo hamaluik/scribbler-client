@@ -19,8 +19,31 @@ $link-hover: $secondary
         background: url('lined_paper_@2X.png') no-repeat top left
         background-size: 300px 224px
 
+html, body
+    min-height: 100vh
+
 body
     font-family: 'Raleway', sans-serif
 
 h1, h2, h3, h4, h5, h6
     font-family: 'Indie Flower', cursive
+
+section.is-fullheight
+    min-height: 100vh
+
+    .column:first-of-type
+        border-right: 1px solid #dddddd
+        background: #f6f6f6
+
+footer
+  position: fixed
+  right: 0
+  bottom: 0
+  left: 0
+  background: #f6f6f6
+  border-top: 1px solid #dddddd
+  padding: 0 1em
+  font-size: 0.75em
+
+.content
+    padding: 1em
