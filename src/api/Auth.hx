@@ -11,8 +11,7 @@ class Auth {
                 return;
             }
 
-            // TODO: crypto!
-            var name_pass:String = '$name:$password';
+            /*var name_pass:String = '$name:$password';
             var name_pass_hash = haxe.crypto.Base64.encode(haxe.io.Bytes.ofString(name_pass));
 
             M.request(App.store.getState().api.root + "/auth", {
@@ -33,7 +32,8 @@ class Auth {
             })
             .catchError(function(err:Dynamic) {
                 reject(err);
-            });
+            });*/
+            reject('Not implemented yet');
         });
     }
 
@@ -52,36 +52,23 @@ class Auth {
                 password = password.substr(0, 128);
             }
 
-            // generate a salt and key to use for signing up
-            var salt:Base64String = switch(Crypto.generate_salt()) {
-                case Ok(salt): salt;
-                case Err(e): {
-                    reject('unable to generate salt!');
-                    return;
-                }
-            };
-
-            // generate a key
-            var server_key:Base64String = switch(Crypto.calculate_key('${name}:${password}')) {
-                case Ok(key): key;
-                case Err(e): {
-                    reject('unable to generate key!');
-                    return;
-                }
-            };
-
-            // now we can ping the server with our sign up
-            M.request(App.store.getState().api.root + "/auth/", {
-                method: 'POST',
-                async: true,
-                data: {
-                    name: name,
-                    server_key: server_key,
-                    salt: salt,
-                    registration_key: registration_key
-                }
+            // get our crypto to generate the salt and key
+            App.postMessage(WorkerMessage.GenerateSaltAndKey, {
+                name: name,
+                password: password
             })
-            .then(function(_) {
+            .then(function(result:{salt:Uint8Array, server_key:Uint8Array}) {
+                return M.request(App.store.getState().api.root + "/auth/", {
+                    method: 'POST',
+                    async: true,
+                    data: {
+                        name: name,
+                        server_key: Base64String.from_bytes(result.server_key),
+                        salt: Base64String.from_bytes(result.salt),
+                        registration_key: registration_key
+                    }
+                });
+            }).then(function(_) {
                 App.console.debug("Sign up successful!");
                 resolve({});
             })
