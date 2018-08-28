@@ -38,6 +38,7 @@ class App {
         M.route(js.Browser.document.body, '/', {
             '/': new ui.routes.Default(),
             '/signin': new ui.routes.SignIn(),
+            '/signup': new ui.routes.SignUp(),
         });
     }
 

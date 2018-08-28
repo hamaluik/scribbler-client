@@ -3,19 +3,33 @@ package ui.routes;
 import mithril.M;
 import bulma.forms.TextField;
 
-class SignIn implements Mithril {
+class SignUp implements Mithril {
 
     var name:Ref<String> = "";
-    var pass:Ref<String> = "";
+    var pass1:Ref<String> = "";
+    var pass2:Ref<String> = "";
+    var reg_key:Ref<String> = "";
 
-    var signing_in:Bool = false;
+    var signing_up:Bool = false;
     var error_msg:Option<String> = None;
 
     @:allow(App) private function new() {
         name.onChanged = Some(function(_) {
             error_msg = None;
         });
-        pass.onChanged = Some(function(_) {
+        pass1.onChanged = Some(function(_) {
+            error_msg = None;
+            if(pass1.value != pass2.value) {
+                error_msg = Some("Passwords must match!");
+            }
+        });
+        pass2.onChanged = Some(function(_) {
+            error_msg = None;
+            if(pass1.value != pass2.value) {
+                error_msg = Some("Passwords must match!");
+            }
+        });
+        reg_key.onChanged = Some(function(_) {
             error_msg = None;
         });
     }
@@ -25,25 +39,25 @@ class SignIn implements Mithril {
         return null;
     }
 
-    function signIn(e:js.html.Event) {
+    function signUp(e:js.html.Event) {
         e.preventDefault();
 
-        signing_in = true;
+        signing_up = true;
         M.redraw();
-        api.Auth.signIn(name.value, pass.value)
+        // TODO: call API signUp function
+        /*api.Auth.signIn(name.value, pass.value)
             .then(function(_) {
-                signing_in = false;
+                signing_up = false;
                 M.routeSet("/");
             })
             .catchError(function(err) {
                 js.Browser.console.error(err);
-                signing_in = false;
+                signing_up = false;
                 error_msg = Some("Unrecognized name and/or password!");
                 M.redraw();
             })
             .then(function(_) {
-                // TODO: request notes from the server!
-            });
+            });*/
     }
 
     public function render(vnode: Vnode<SignIn>): Vnodes {
@@ -69,10 +83,10 @@ class SignIn implements Mithril {
                             m('.column.is-one-third', [
                                 m('.box.content', [
                                     m("form", {
-                                        onsubmit: signIn,
+                                        onsubmit: SignUp,
                                         action: "#"
                                     }, [
-                                        m('h1', 'Scribbler: Sign In'),
+                                        m('h1', 'Scribbler: Sign Up'),
                                         m('.field', [
                                             m('label.label', 'Name'),
                                             m(TextField, {
@@ -87,24 +101,47 @@ class SignIn implements Mithril {
                                             m(TextField, {
                                                 type: 'password',
                                                 icon_left: 'key',
-                                                value: pass,
+                                                value: pass1,
                                                 placeholder: '****************'
                                             })
                                         ]),
+                                        m('.field', [
+                                            m('label.label', 'Password (Again)'),
+                                            m(TextField, {
+                                                type: 'password',
+                                                icon_left: 'key',
+                                                value: pass2,
+                                                placeholder: '****************'
+                                            })
+                                        ]),
+                                        m('.field', [
+                                            m('label.label', 'Registration Key'),
+                                            m(TextField, {
+                                                type: 'text',
+                                                icon_left: 'passport',
+                                                value: reg_key,
+                                                placeholder: ''
+                                            })
+                                        ]),
                                         error_display,
+                                        m('.notification.is-warning', [
+                                            m('b', "Note:"),
+                                            " All of your notes will be encrypted using this password, and this password is the only thing that can unlock them. There is no password reset or data recovery without this password. Make it a good one."
+                                        ]),
                                         m('.field.is-grouped.is-grouped-right', [
                                             m('.control', [
                                                 m('a.button', {
-                                                    href: "#!/signup"
+                                                    href: "#!/signin"
                                                 }, [
-                                                    m("span", "Sign Up")
+                                                    m("span.icon", m("i.fas.fa-arrow-square-left")),
+                                                    m("span", " Sign In")
                                                 ])
                                             ]),
                                             m('.control', [
-                                                m('button.button.is-primary' + (signing_in ? '.is-loading' : ''), {
+                                                m('button.button.is-primary' + (signing_up ? '.is-loading' : ''), {
                                                     type: "submit"
                                                 }, [
-                                                    m("span", "Sign In")
+                                                    m("span", "Sign Up")
                                                 ])
                                             ]),
                                         ])
