@@ -103,6 +103,7 @@ class SignIn implements Mithril {
                                                 m('a.button', {
                                                     href: "#!/signup"
                                                 }, [
+                                                    m("span.icon", m("i.fas.fa-user-plus")),
                                                     m("span", "Sign Up")
                                                 ])
                                             ]),
@@ -110,7 +111,8 @@ class SignIn implements Mithril {
                                                 m('button.button.is-primary' + (signing_in ? '.is-loading' : ''), {
                                                     type: "submit"
                                                 }, [
-                                                    m("span", "Sign In")
+                                                    m("span.icon", m("i.fas.fa-unlock")),
+                                                    m("span", "Sign In"),
                                                 ])
                                             ]),
                                         ])

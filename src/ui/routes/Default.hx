@@ -7,7 +7,7 @@ class Default implements Mithril {
 
     public function onmatch(args: haxe.DynamicAccess<String>, requestedPath: String) {
         // TODO: re-enable!
-        //if(App.store.getState().auth.token.match(None)) M.routeSet('/signin');
+        if(App.store.getState().auth.token.match(None)) M.routeSet('/signin');
         return null;
     }
 
@@ -77,7 +77,7 @@ Eiusmod aliqua nulla cupidatat esse in cillum proident consectetur aliquip conse
         return [
             m('section.is-fullheight', [
                 m('.container.columns', [
-                    m('.column.is-one-quarter', "I am the left column"),
+                    m('.column.is-one-quarter.note-list', "I am the left column"),
                     m('.column.content', [
                         M.trust(rendered_html)
                     ])
@@ -90,7 +90,7 @@ Eiusmod aliqua nulla cupidatat esse in cillum proident consectetur aliquip conse
                         m('.level-item', [
                             m('a', { href: '#!/signout' }, [
                                 m('span.icon', [
-                                    m('i.fas.fa-sign-out')
+                                    m('i.fas.fa-sign-out-alt')
                                 ]),
                                 m('b', 'Sign Out')
                             ])

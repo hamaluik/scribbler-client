@@ -12,12 +12,11 @@ $gap: 0px
 @import url('https://fonts.googleapis.com/css?family=Indie+Flower|Raleway:400,400i,700,700i&subset=latin-ext')
 
 .is-bg
-    background-image: url(lined_paper.png)
-    background-repeat: repeat
+    background: url(lined_paper.png) repeat
 
 @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx)
     .is-bg
-        background: url('lined_paper_@2X.png') no-repeat top left
+        background: url('lined_paper_@2X.png') repeat
         background-size: 300px 224px
 
 html, body
@@ -33,7 +32,7 @@ body
 section.is-fullheight
     min-height: 100vh
 
-    .column:first-of-type
+    .note-list
         border-right: 1px solid #dddddd
         background: #f6f6f6
 

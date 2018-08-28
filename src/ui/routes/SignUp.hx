@@ -129,7 +129,7 @@ class SignUp implements Mithril {
                                                 m('a.button', {
                                                     href: "#!/signin"
                                                 }, [
-                                                    m("span.icon", m("i.fas.fa-arrow-square-left")),
+                                                    m("span.icon", m("i.fas.fa-backward")),
                                                     m("span", " Sign In")
                                                 ])
                                             ]),
@@ -137,7 +137,8 @@ class SignUp implements Mithril {
                                                 m('button.button.is-primary' + (signing_up ? '.is-loading' : ''), {
                                                     type: "submit"
                                                 }, [
-                                                    m("span", "Sign Up")
+                                                    m("span.icon", m("i.fas.fa-user-plus")),
+                                                    m("span", "Sign Up"),
                                                 ])
                                             ]),
                                         ])
