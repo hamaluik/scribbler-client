@@ -7,7 +7,7 @@ class Default implements Mithril {
 
     public function onmatch(args: haxe.DynamicAccess<String>, requestedPath: String) {
         // TODO: re-enable!
-        if(App.store.getState().auth.token.match(None)) M.routeSet('/signin');
+        //if(App.store.getState().auth.token.match(None)) M.routeSet('/signin');
         return null;
     }
 
@@ -75,27 +75,74 @@ Eiusmod aliqua nulla cupidatat esse in cillum proident consectetur aliquip conse
 ");
 
         return [
-            m('section.is-fullheight', [
-                m('.container.columns', [
-                    m('.column.is-one-quarter.note-list', "I am the left column"),
-                    m('.column.content', [
-                        M.trust(rendered_html)
+            m('.is-fullheight', [
+                m('.columns.is-gapless', [
+                    m('.column.is-one-quarter.note-list', [
+                        m('section.toolbar.has-text-centered', [
+                            m('a.button.is-text.is-small', { href: '#!/' }, [
+                                m('span.icon[aria-hidden]', [
+                                    m('i.fas.fa-caret-up')
+                                ]),
+                                m('b', 'Title')
+                            ]),
+                            m('a.button.is-text.is-small', { href: '#!/' }, [
+                                m('span.icon', [
+                                    m('i.fas.fa-caret-down')
+                                ]),
+                                m('b', 'Date')
+                            ]),
+                        ]),
+
+                    ]),
+                    m('.column', [
+                        m('header', [
+                            m('h1.title', "Lorem Ipsum"),
+                            m('h2.subtitle', "Last modified Tue Aug 28, 22:08"),
+                            m('.field.is-grouped.is-grouped-multiline', [
+                                m('.control', [
+                                    m('.tags.has-addons', [
+                                        m('a.tag.is-dark', "Recipe"),
+                                        m('a.tag.is-delete')
+                                    ])
+                                ])
+                            ])
+                        ]),
+                        m('section.toolbar', [
+                            m('a.button.is-text.is-small', { href: '#!/edit' }, [
+                                m('span.icon', [
+                                    m('i.fas.fa-edit')
+                                ]),
+                                m('b', 'Edit')
+                            ]),
+                            m('a.button.is-text.is-small', { href: '#!/edit' }, [
+                                m('span.icon', [
+                                    m('i.fas.fa-thumbtack')
+                                ]),
+                                m('b', 'Pin')
+                            ]),
+                            m('a.button.is-text.is-small', { href: '#!/edit' }, [
+                                m('span.icon', [
+                                    m('i.fas.fa-trash')
+                                ]),
+                                m('b', 'Delete')
+                            ]),
+                        ]),
+                        m('section.content.has-bg', M.trust(rendered_html))
                     ])
                 ])
             ]),
             m('footer', [
-                m('.level', [
-                    m('.level-left', []),
-                    m('.level-right', [
-                        m('.level-item', [
-                            m('a', { href: '#!/signout' }, [
-                                m('span.icon', [
-                                    m('i.fas.fa-sign-out-alt')
-                                ]),
-                                m('b', 'Sign Out')
-                            ])
-                        ])
-                    ])
+                m('a.button.is-text.is-small', { href: '#!/sync' }, [
+                    m('span.icon', [
+                        m('i.fas.fa-sync-alt')
+                    ]),
+                    m('b', 'Sync')
+                ]),
+                m('a.button.is-text.is-small', { href: '#!/signout' }, [
+                    m('span.icon', [
+                        m('i.fas.fa-sign-out-alt')
+                    ]),
+                    m('b', 'Sign Out')
                 ])
             ])
         ];

@@ -72,7 +72,7 @@ class SignUp implements Mithril {
         };
 
         return [
-            m('section.hero.is-fullheight.is-bg', [
+            m('section.hero.is-fullheight.has-bg', [
                 m('.hero-body', [
                     m('.container', [
                         m('.columns.is-centered', [
