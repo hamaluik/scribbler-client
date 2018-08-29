@@ -80,20 +80,20 @@ Eiusmod aliqua nulla cupidatat esse in cillum proident consectetur aliquip conse
             m('.is-fullheight', [
                 m('.columns.is-gapless', [
                     m('.column.is-one-quarter.note-list', [
-                        m('header', [
-                            m('.columns.is-mobile', [
-                                m('.column', [
-                                    m('h1.title.is-4', 'Notes'),
-                                ]),
-                                m('.column.has-text-right', [
-                                    m('a.button.is-primary.is-small', { href: '#!/' }, [
-                                        m(Icon, {
-                                            glyph: "plus"
-                                        }),
-                                        m('b', 'New')
-                                    ]),
-                                ])
+                        m('.columns.is-mobile.is-gapless', [
+                            m('.column', [
+                                m('h1.title.is-4', 'Notes'),
                             ]),
+                            m('.column.has-text-right', [
+                                m('a.button.is-primary.is-small', { href: '#!/' }, [
+                                    m(Icon, {
+                                        glyph: "plus"
+                                    }),
+                                    m('b', 'New')
+                                ]),
+                            ])
+                        ]),
+                        m('header', [
                             m('form', {
                                 onsubmit: function() {},
                                 action: '#'
