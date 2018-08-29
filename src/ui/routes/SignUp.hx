@@ -3,6 +3,7 @@ package ui.routes;
 import mithril.M;
 import bulma.forms.TextField;
 import util.Ref;
+import bulma.elements.Icon;
 
 class SignUp implements Mithril {
 
@@ -73,7 +74,7 @@ class SignUp implements Mithril {
         };
 
         return [
-            m('section.hero.is-fullheight.is-bg', [
+            m('section.hero.is-fullheight.has-bg', [
                 m('.hero-body', [
                     m('.container', [
                         m('.columns.is-centered', [
@@ -130,7 +131,7 @@ class SignUp implements Mithril {
                                                 m('a.button', {
                                                     href: "#!/signin"
                                                 }, [
-                                                    m("span.icon", m("i.fas.fa-arrow-square-left")),
+                                                    m(Icon, { glyph: "backward" }),
                                                     m("span", " Sign In")
                                                 ])
                                             ]),
@@ -138,7 +139,8 @@ class SignUp implements Mithril {
                                                 m('button.button.is-primary' + (signing_up ? '.is-loading' : ''), {
                                                     type: "submit"
                                                 }, [
-                                                    m("span", "Sign Up")
+                                                    m(Icon, { glyph: "user-plus" }),
+                                                    m("span", "Sign Up"),
                                                 ])
                                             ]),
                                         ])

@@ -19,6 +19,7 @@ import crypto.AppPayload;
 class App {
     public static var console:Console;
     public static var store:Store<AppState>;
+    public static var markdown:MarkdownIt;
     static var worker:js.html.Worker;
     static var nextID:Int;
     static var workerResolvers:IntMap<{resolve:Dynamic->Void, reject:Dynamic->Void}>;
@@ -37,6 +38,9 @@ class App {
         var scriptPath = cast(Browser.document.currentScript, ScriptElement).src;
         worker = new Worker(scriptPath);
         worker.onmessage = onMessageFromWorker;
+
+        // initialize the markdown parser
+        markdown = untyped window.markdownit();
 
         // initialize the data store
         store = data.state.AppState.AppStateTools.initialize();
