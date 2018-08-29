@@ -1,6 +1,7 @@
 package ui.routes;
 
 import mithril.M;
+import ui.components.NoteInList;
 
 class Default implements Mithril {
     @:allow(App) private function new(){}
@@ -129,21 +130,16 @@ Eiusmod aliqua nulla cupidatat esse in cillum proident consectetur aliquip conse
                             ]),
                         ]),
                         m('section.list', [
-                            m('a.content.selected', [
-                                m('h1.title.is-4', "Mom's Chilli"),
-                                m('h2.subtitle.is-6', "Tue Aug 28, 22:47"),
-                                m('.tags', [
-                                    m('span.tag.is-light', 'Recipe')
-                                ])
-                            ]),
-                            m('a.content', [
-                                m('h1.title.is-4', "Beef Stew"),
-                                m('h2.subtitle.is-6', "Tue Aug 28, 22:52"),
-                                m('.tags', [
-                                    m('span.tag.is-light', 'Recipe'),
-                                    m('span.tag.is-light', 'Instant Pot'),
-                                ])
-                            ])
+                            m(NoteInList, {
+                                title: "Mom's Chilli",
+                                date: "Tue Aug 28, 22:47",
+                                tags: ["Recipe"]
+                            }),
+                            m(NoteInList, {
+                                title: "Beef Stew",
+                                date: "Tue Aug 28, 22:52",
+                                tags: ["Recipe", "Instant Pot"]
+                            }),
                         ])
                     ]),
                     m('.column', [
