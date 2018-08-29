@@ -1,6 +1,9 @@
+package crypto;
+
 import js.html.Uint8Array;
 import js.html.DedicatedWorkerGlobalScope;
 import js.html.MessageEvent;
+import util.Base64String;
 
 class CryptoWorker {
 	static var initialized:Bool = false;

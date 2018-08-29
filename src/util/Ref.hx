@@ -1,3 +1,5 @@
+package util;
+
 class RefObject<T> {
     public var value:T;
     public var onChanged:Option<T->Void> = None;
