@@ -2,6 +2,7 @@ package ui.routes;
 
 import mithril.M;
 import ui.components.NoteInList;
+import bulma.elements.Icon;
 
 class Default implements Mithril {
     @:allow(App) private function new(){}
@@ -86,9 +87,9 @@ Eiusmod aliqua nulla cupidatat esse in cillum proident consectetur aliquip conse
                                 ]),
                                 m('.column.has-text-right', [
                                     m('a.button.is-primary.is-small', { href: '#!/' }, [
-                                        m('span.icon[aria-hidden]', [
-                                            m('i.fas.fa-plus')
-                                        ]),
+                                        m(Icon, {
+                                            glyph: "plus"
+                                        }),
                                         m('b', 'New')
                                     ]),
                                 ])
@@ -106,9 +107,9 @@ Eiusmod aliqua nulla cupidatat esse in cillum proident consectetur aliquip conse
                                     ]),
                                     m('.control', [
                                         m('button.button.is-dark.is-small', { type: 'submit' }, [
-                                            m('span.icon[aria-hidden]', [
-                                                m('i.fas.fa-search')
-                                            ]),
+                                            m(Icon, {
+                                                glyph: "search"
+                                            }),
                                             m('span', 'Search')
                                         ])
                                     ])
@@ -117,15 +118,15 @@ Eiusmod aliqua nulla cupidatat esse in cillum proident consectetur aliquip conse
                         ]),
                         m('section.toolbar.has-text-centered', [
                             m('a.button.is-text.is-small', { href: '#!/' }, [
-                                m('span.icon[aria-hidden]', [
-                                    m('i.fas.fa-caret-up')
-                                ]),
+                                m(Icon, {
+                                    glyph: "caret-up"
+                                }),
                                 m('b', 'Title')
                             ]),
                             m('a.button.is-text.is-small', { href: '#!/' }, [
-                                m('span.icon', [
-                                    m('i.fas.fa-caret-down')
-                                ]),
+                                m(Icon, {
+                                    glyph: "caret-down"
+                                }),
                                 m('b', 'Date')
                             ]),
                         ]),
@@ -163,21 +164,21 @@ Eiusmod aliqua nulla cupidatat esse in cillum proident consectetur aliquip conse
                         ]),
                         m('section.toolbar', [
                             m('a.button.is-text.is-small', { href: '#!/edit' }, [
-                                m('span.icon', [
-                                    m('i.fas.fa-edit')
-                                ]),
+                                m(Icon, {
+                                    glyph: "edit"
+                                }),
                                 m('b', 'Edit')
                             ]),
                             m('a.button.is-text.is-small', { href: '#!/edit' }, [
-                                m('span.icon', [
-                                    m('i.fas.fa-thumbtack')
-                                ]),
+                                m(Icon, {
+                                    glyph: "thumbtack"
+                                }),
                                 m('b', 'Pin')
                             ]),
                             m('a.button.is-text.is-small', { href: '#!/edit' }, [
-                                m('span.icon', [
-                                    m('i.fas.fa-trash')
-                                ]),
+                                m(Icon, {
+                                    glyph: "trash"
+                                }),
                                 m('b', 'Delete')
                             ]),
                         ]),
@@ -188,15 +189,15 @@ Eiusmod aliqua nulla cupidatat esse in cillum proident consectetur aliquip conse
             m('footer', [
                 m('span.button.is-text.is-small', 'Last synced Tue Aug 28, 22:08'),
                 m('a.button.is-text.is-small', { href: '#!/sync' }, [
-                    m('span.icon', [
-                        m('i.fas.fa-sync-alt')
-                    ]),
+                    m(Icon, {
+                        glyph: "sync-alt"
+                    }),
                     m('b', 'Sync')
                 ]),
                 m('a.button.is-text.is-small', { href: '#!/signout' }, [
-                    m('span.icon', [
-                        m('i.fas.fa-sign-out-alt')
-                    ]),
+                    m(Icon, {
+                        glyph: "sign-out-alt"
+                    }),
                     m('b', 'Sign Out')
                 ])
             ])

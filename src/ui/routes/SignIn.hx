@@ -2,6 +2,7 @@ package ui.routes;
 
 import mithril.M;
 import bulma.forms.TextField;
+import bulma.elements.Icon;
 
 class SignIn implements Mithril {
 
@@ -103,7 +104,7 @@ class SignIn implements Mithril {
                                                 m('a.button', {
                                                     href: "#!/signup"
                                                 }, [
-                                                    m("span.icon", m("i.fas.fa-user-plus")),
+                                                    m(Icon, { glyph: "user-plus" }),
                                                     m("span", "Sign Up")
                                                 ])
                                             ]),
@@ -111,7 +112,7 @@ class SignIn implements Mithril {
                                                 m('button.button.is-primary' + (signing_in ? '.is-loading' : ''), {
                                                     type: "submit"
                                                 }, [
-                                                    m("span.icon", m("i.fas.fa-unlock")),
+                                                    m(Icon, { glyph: "unlock" }),
                                                     m("span", "Sign In"),
                                                 ])
                                             ]),
