@@ -134,7 +134,8 @@ Eiusmod aliqua nulla cupidatat esse in cillum proident consectetur aliquip conse
                             m(NoteInList, {
                                 title: "Mom's Chilli",
                                 date: "Tue Aug 28, 22:47",
-                                tags: ["Recipe"]
+                                tags: ["Recipe"],
+                                selected: true
                             }),
                             m(NoteInList, {
                                 title: "Beef Stew",
