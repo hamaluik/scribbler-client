@@ -34,6 +34,26 @@ section.is-fullheight
 
 .note-list
     border-right: 1px solid #dddddd
+    background: #f6f6f6
+
+    header
+        background: white
+
+    .list
+        a
+            display: block
+            background: white
+            border-bottom: 1px solid #dddddd
+            margin: 0
+
+        a.selected
+            background: $primary
+            
+            h1, h2
+                color: white !important
+
+        a:hover
+            background: $link-hover
 
 .columns
     max-width: 100%

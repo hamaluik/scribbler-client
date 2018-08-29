@@ -78,6 +78,42 @@ Eiusmod aliqua nulla cupidatat esse in cillum proident consectetur aliquip conse
             m('.is-fullheight', [
                 m('.columns.is-gapless', [
                     m('.column.is-one-quarter.note-list', [
+                        m('header', [
+                            m('.columns.is-mobile', [
+                                m('.column', [
+                                    m('h1.title.is-4', 'Notes'),
+                                ]),
+                                m('.column.has-text-right', [
+                                    m('a.button.is-primary.is-small', { href: '#!/' }, [
+                                        m('span.icon[aria-hidden]', [
+                                            m('i.fas.fa-plus')
+                                        ]),
+                                        m('b', 'New')
+                                    ]),
+                                ])
+                            ]),
+                            m('form', {
+                                onsubmit: function() {},
+                                action: '#'
+                            }, [
+                                m('.field.has-addons', [
+                                    m('.control.is-expanded', [
+                                        m('input.input.is-small', {
+                                            type: 'text',
+                                            placeholder: 'title, tags, etc'
+                                        })
+                                    ]),
+                                    m('.control', [
+                                        m('button.button.is-dark.is-small', { type: 'submit' }, [
+                                            m('span.icon[aria-hidden]', [
+                                                m('i.fas.fa-search')
+                                            ]),
+                                            m('span', 'Search')
+                                        ])
+                                    ])
+                                ])
+                            ])
+                        ]),
                         m('section.toolbar.has-text-centered', [
                             m('a.button.is-text.is-small', { href: '#!/' }, [
                                 m('span.icon[aria-hidden]', [
@@ -92,7 +128,23 @@ Eiusmod aliqua nulla cupidatat esse in cillum proident consectetur aliquip conse
                                 m('b', 'Date')
                             ]),
                         ]),
-
+                        m('section.list', [
+                            m('a.content.selected', [
+                                m('h1.title.is-4', "Mom's Chilli"),
+                                m('h2.subtitle.is-6', "Tue Aug 28, 22:47"),
+                                m('.tags', [
+                                    m('span.tag.is-light', 'Recipe')
+                                ])
+                            ]),
+                            m('a.content', [
+                                m('h1.title.is-4', "Beef Stew"),
+                                m('h2.subtitle.is-6', "Tue Aug 28, 22:52"),
+                                m('.tags', [
+                                    m('span.tag.is-light', 'Recipe'),
+                                    m('span.tag.is-light', 'Instant Pot'),
+                                ])
+                            ])
+                        ])
                     ]),
                     m('.column', [
                         m('header', [
@@ -101,7 +153,13 @@ Eiusmod aliqua nulla cupidatat esse in cillum proident consectetur aliquip conse
                             m('.field.is-grouped.is-grouped-multiline', [
                                 m('.control', [
                                     m('.tags.has-addons', [
-                                        m('a.tag.is-dark', "Recipe"),
+                                        m('a.tag.is-light', "Recipe"),
+                                        m('a.tag.is-delete')
+                                    ])
+                                ]),
+                                m('.control', [
+                                    m('.tags.has-addons', [
+                                        m('a.tag.is-light', "Instant Pot"),
                                         m('a.tag.is-delete')
                                     ])
                                 ])
@@ -127,11 +185,12 @@ Eiusmod aliqua nulla cupidatat esse in cillum proident consectetur aliquip conse
                                 m('b', 'Delete')
                             ]),
                         ]),
-                        m('section.content.has-bg', M.trust(rendered_html))
+                        m('section.content', M.trust(rendered_html))
                     ])
                 ])
             ]),
             m('footer', [
+                m('span.button.is-text.is-small', 'Last synced Tue Aug 28, 22:08'),
                 m('a.button.is-text.is-small', { href: '#!/sync' }, [
                     m('span.icon', [
                         m('i.fas.fa-sync-alt')
