@@ -9,6 +9,12 @@ import data.state.AppState;
 import js.html.ScriptElement;
 import js.html.MessageEvent;
 import js.html.Worker;
+import markdownit.MarkdownIt;
+import crypto.CryptoWorker;
+import crypto.WorkerMessage;
+import crypto.WorkerPayload;
+import crypto.AppMessage;
+import crypto.AppPayload;
 
 class App {
     public static var console:Console;

@@ -1,9 +1,9 @@
+package crypto;
+
 import sodium.Sodium;
 import js.html.Uint8Array;
 import js.html.TextEncoder;
 import js.html.TextDecoder;
-import js.Promise;
-import js.Browser;
 
 enum CryptoError {
     NotLoaded;

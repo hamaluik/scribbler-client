@@ -1,3 +1,5 @@
+package util;
+
 import js.html.Uint8Array;
 import haxe.crypto.Base64;
 import haxe.io.Bytes;

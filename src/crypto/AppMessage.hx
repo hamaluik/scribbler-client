@@ -1,4 +1,4 @@
-import js.html.ArrayBuffer;
+package crypto;
 
 enum abstract AppMessage(String) {
     var Info = "INFO";

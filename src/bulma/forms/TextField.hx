@@ -1,6 +1,7 @@
 package bulma.forms;
 
 import mithril.M;
+import util.Ref;
 
 class TextField implements Mithril {
     var value:String = "";

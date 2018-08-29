@@ -4,6 +4,8 @@ import haxe.Timer;
 import data.actions.AuthActions;
 import js.html.Uint8Array;
 import mithril.M;
+import crypto.WorkerMessage;
+import util.Base64String;
 
 class Auth {
     static var refresh_timer:Timer;
