@@ -19,7 +19,6 @@ class View implements Mithril {
         var rendered_html:String = App.markdown.render("");
 
         var id:Null<String> = M.routeAttrs(vnode).get('id');
-        App.console.debug('Rendering view for id', id);
 
         return [
             m('.is-fullheight', [
@@ -27,10 +26,10 @@ class View implements Mithril {
                     m(ControlPane),
                     m('.column', [
                         m('header', [
-                            m(NoteHeader, { id: '42' }),
-                            m(TagList, { id: '42', editable: false })
+                            m(NoteHeader, { id: id }),
+                            m(TagList, { id: id, editable: false })
                         ]),
-                        m(EditToolbar, { id: '42' }),
+                        m(EditToolbar, { id: id }),
                         m('section.content', M.trust(rendered_html))
                     ])
                 ])

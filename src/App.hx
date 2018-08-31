@@ -62,6 +62,7 @@ class App {
             '/new': new ui.routes.New(),
             '/edit': new ui.routes.Edit(),
             '/rename': new ui.routes.Rename(),
+            '/delete': new ui.routes.Delete(),
         });
     }
 
