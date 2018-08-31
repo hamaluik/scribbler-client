@@ -1,8 +1,14 @@
 @charset "utf-8"
 
-$primary: #3c989e
-$secondary: #ed5277
-$link: darken($secondary, 25%)
+// https://material.io/tools/color/#!/?view.left=1&view.right=0&secondary.color=795548&primary.color=03A9F4
+$primary: #03a9f4
+$primary-light: #67daff
+$primary-dark: #007ac1
+$secondary: #795548
+$secondary-light: #a98274
+$secondary-dark: #4b2c20
+
+$link: $secondary-dark
 $link-hover: $secondary
 $gap: 0px
 
@@ -61,6 +67,7 @@ body
 
         a:hover
             background: $link-hover
+            color: white !important
 
 .columns
     max-width: 100%
@@ -83,12 +90,43 @@ header
     padding: 1em
 
 .toolbar
-  background: #f6f6f6
-  border-top: 1px solid #dddddd
-  border-bottom: 1px solid #dddddd
-  font-size: 0.75em
-  text-align: right
+    background: #f6f6f6
+    border-top: 1px solid #dddddd
+    border-bottom: 1px solid #dddddd
+    font-size: 0.75em
+    text-align: right
 
 .content
     padding: 1em
     margin-bottom: 1em
+
+//@keyframes controlPaneOut
+//    from
+//        width: 25%
+//  
+//    to
+//        visibility: hidden
+//        width: 0
+//
+//@keyframes controlPaneIn
+//    from
+//        visibility: hidden
+//        width: 0
+//  
+//    to
+//        width: 25%
+//
+//.controlPaneOut
+//    animation-name: controlPaneOut
+//
+//.controlPaneIn
+//    animation-name: controlPaneIn
+//
+//.animated
+//    animation-duration: 1s
+//    animation-fill-mode: both
+//
+//@media (prefers-reduced-motion)
+//    .animated
+//        animation: unset !important
+//        transition: none !important
