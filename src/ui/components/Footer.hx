@@ -8,13 +8,19 @@ class Footer implements Mithril {
         return
         m('footer', [
             m('span.button.is-text.is-small', 'Last synced Tue Aug 28, 22:08'),
-            m('a.button.is-text.is-small', { href: '#!/sync' }, [
+            m('button.button.is-text.is-small', { onclick: function() {
+                App.console.debug('TODO: sync');
+            } }, [
                 m(Icon, {
                     glyph: "sync-alt"
                 }),
                 m('b', 'Sync')
             ]),
-            m('a.button.is-text.is-small', { href: '#!/signout' }, [
+            m('button.button.is-text.is-small', { onclick: function() {
+                App.console.debug('attempting sign out...');
+                api.Auth.signOut();
+                M.routeSet('#!/signin');
+            } }, [
                 m(Icon, {
                     glyph: "sign-out-alt"
                 }),

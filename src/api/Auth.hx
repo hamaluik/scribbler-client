@@ -71,6 +71,7 @@ class Auth {
 
     @:allow(data.reducers.AuthReducer)
     static function stop_refresh():Void {
+        if(refresh_timer == null) return;
         refresh_timer.stop();
         refresh_timer = null;
         App.console.info("sign in refresh cancelled!");
@@ -151,5 +152,9 @@ class Auth {
                 reject(err);
             });
         });
+    }
+
+    public static function signOut():Void {
+        App.store.dispatch(AuthActions.SignOut);
     }
 }

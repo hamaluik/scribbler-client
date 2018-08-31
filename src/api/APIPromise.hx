@@ -1,3 +1,3 @@
 package api;
 
-typedef APIPromise = js.Promise<{}>;
+typedef APIPromise = js.Promise<Dynamic>;
