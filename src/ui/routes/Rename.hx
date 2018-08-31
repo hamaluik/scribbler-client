@@ -1,5 +1,11 @@
 package ui.routes;
 
+import ui.components.Footer;
+import ui.components.EditToolbar;
+import ui.components.NoteHeader;
+import ui.components.TagList;
+import ui.components.ControlPane;
+import data.types.Note;
 import mithril.M;
 
 class Rename implements Mithril {
@@ -11,6 +17,38 @@ class Rename implements Mithril {
     }
 
     public function render(vnode: Vnode<Rename>): Vnodes {
-        return null;
+        var id:Null<String> = M.routeAttrs(vnode).get('id');
+        var note:Option<Note> = id == null ? None : App.store.getState().notes.get(id);
+
+        var rendered_html:String = switch(note) {
+            case Some(n): App.markdown.render(n.note);
+            case None: "";
+        };
+
+        return [
+            m('.is-fullheight', [
+                m('.columns.is-gapless', [
+                    m(ControlPane, { id: id }),
+                    m('.column', [
+                        m('header', [
+                            m(NoteHeader, { id: id }),
+                            m(TagList, { id: id, editable: false })
+                        ]),
+                        m(EditToolbar, { id: id }),
+                        m('section.content', M.trust(rendered_html))
+                    ])
+                ])
+            ]),
+            m(Footer),
+            m('.modal.is-active', [
+                m('.modal-background[aria-label=close]', { onclick: function() { M.routeSet('#!/view?id=${id}'); } }),
+                m('.modal-content', [
+                    m('.box.content', [
+                        m('p', 'Time to enter a new name:')
+                    ])
+                ]),
+                m('button.modal-close.is-large[aria-label=close]', { onclick: function() { M.routeSet('#!/view?id=${id}'); } })
+            ])
+        ];
     }
 }
