@@ -21,13 +21,15 @@ class EditToolbar implements Mithril {
                 }),
                 m('b', 'Rename')
             ]),
-            m('a.button.is-text.is-small', { href: '#!/pin?id=${id}&return=/view' }, [
+            m('button.button.is-text.is-small', { onclick: function() {
+                App.console.debug('TODO: pin it!');
+            } }, [
                 m(Icon, {
                     glyph: "thumbtack"
                 }),
                 m('b', 'Pin')
             ]),
-            m('a.button.is-text.is-small', { href: '#!/delete?id=${id}&return=/view' }, [
+            m('a.button.is-text.is-small', { href: '#!/delete?id=${id}' }, [
                 m(Icon, {
                     glyph: "trash"
                 }),

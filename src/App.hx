@@ -55,17 +55,13 @@ class App {
             });
 
         // and initialize routing...
-        M.route(js.Browser.document.body, '/', {
-            '/': new ui.routes.Default(),
+        M.route(js.Browser.document.body, '/view', {
             '/signin': new ui.routes.SignIn(),
             '/signup': new ui.routes.SignUp(),
             '/view': new ui.routes.View(),
             '/new': new ui.routes.New(),
             '/edit': new ui.routes.Edit(),
             '/rename': new ui.routes.Rename(),
-            '/sort': new ui.routes.Sort(),
-            '/pin': new ui.routes.Pin(),
-            '/sync': new ui.routes.Sync(),
         });
     }
 
