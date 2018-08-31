@@ -22,14 +22,14 @@ class AuthReducer implements redux.IReducer<AuthActions, AuthState> {
 
             case AuthActions.SignIn(token): {
                 var newState = {
-                    token: Option.Some(token)
+                    token: Some(token)
                 };
                 js.Object.assign(blank, state, newState);
             }
 
             case AuthActions.Refresh(token): {
                 var newState = {
-                    token: Option.Some(token)
+                    token: Some(token)
                 };
                 js.Object.assign(blank, state, newState);
             }
@@ -37,7 +37,7 @@ class AuthReducer implements redux.IReducer<AuthActions, AuthState> {
             case AuthActions.SignOut: {
                 Auth.stop_refresh();
                 var newState = {
-                    token: Option.None
+                    token: None
                 };
                 js.Object.assign(blank, state, newState);
             }
