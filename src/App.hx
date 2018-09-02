@@ -1,3 +1,5 @@
+import js.Date;
+import data.actions.NoteActions;
 import js.html.Uint8Array;
 import haxe.ds.IntMap;
 import js.Promise;
@@ -64,6 +66,22 @@ class App {
             '/rename': new ui.routes.Rename(),
             '/delete': new ui.routes.Delete(),
         });
+
+        // add some dummy notes for testing
+        App.store.dispatch(NoteActions.Create(
+            "testid",
+            "Mom's Chilli",
+            ["Recipe", "Cooking"],
+            "Take you some **beans** and **tomatoes** and **beef** and make a _chilli_!",
+            new Date(Date.now())
+        ));
+        App.store.dispatch(NoteActions.Create(
+            "id2",
+            "Bank Details",
+            ["Important", "Reference"],
+            "Bank number xxx, branch xxxxx, account xxxxxxxx",
+            new Date(Date.now())
+        ));
     }
 
     public static function postMessage(message:WorkerMessage, data:Dynamic):Promise<Dynamic> {

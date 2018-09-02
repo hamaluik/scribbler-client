@@ -1,11 +1,11 @@
 package ui.routes;
 
+import data.types.Note;
 import mithril.M;
 import ui.components.ControlPane;
 import ui.components.EditToolbar;
 import ui.components.Footer;
 import ui.components.NoteHeader;
-import ui.components.TagList;
 
 class View implements Mithril {
     @:allow(App) private function new(){}
@@ -16,9 +16,12 @@ class View implements Mithril {
     }
 
     public function render(vnode: Vnode<View>): Vnodes {
-        var rendered_html:String = App.markdown.render("");
-
         var id:Null<String> = M.routeAttrs(vnode).get('id');
+        var note:Option<Note> = App.store.getState().notes.get(id);
+        var rendered:Vnodes = switch(note) {
+            case Some(n): M.trust(App.markdown.render(n.note));
+            case None: null;
+        };
 
         return [
             m('.is-fullheight', [
@@ -26,8 +29,8 @@ class View implements Mithril {
                     m(ControlPane),
                     m('.column', [
                         m(NoteHeader, { id: id, editable: false }),
-                        m(EditToolbar, { id: id }),
-                        m('section.content', M.trust(rendered_html))
+                        m(EditToolbar, { id: id, is_editing: false }),
+                        m('section.content', rendered)
                     ])
                 ])
             ]),
