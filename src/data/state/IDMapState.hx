@@ -5,9 +5,9 @@ abstract IDMapState<T>({}) from {} to {} {
         return Reflect.hasField(this, Std.string(id));
     }
 
-    inline public function get(id:String):Option<T> {
+    inline public function get(id:Null<String>):Option<T> {
         return
-            if(!exists(id)) None;
+            if(id == null || !exists(id)) None;
             else Some(Reflect.field(this, Std.string(id)));
     }
 

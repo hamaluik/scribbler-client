@@ -25,10 +25,7 @@ class View implements Mithril {
                 m('.columns.is-gapless', [
                     m(ControlPane),
                     m('.column', [
-                        m('header', [
-                            m(NoteHeader, { id: id }),
-                            m(TagList, { id: id, editable: false })
-                        ]),
+                        m(NoteHeader, { id: id, editable: false }),
                         m(EditToolbar, { id: id }),
                         m('section.content', M.trust(rendered_html))
                     ])
