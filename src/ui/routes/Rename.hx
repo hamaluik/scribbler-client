@@ -64,7 +64,7 @@ class Rename implements Mithril {
                             },
                             action: "#"
                         }, [
-                            m('p', 'Please enter the new name for this note:'),
+                            m('p', 'Please enter the new title for this note:'),
                             m('.field', [
                                 m('label.label', 'New Title'),
                                 m(TextField, { value: new_title })

@@ -68,7 +68,7 @@ class App {
         });
 
         // add some dummy notes for testing
-        App.store.dispatch(NoteActions.Create(
+        /*App.store.dispatch(NoteActions.Create(
             "testid",
             "Mom's Chilli",
             ["Recipe", "Cooking"],
@@ -81,7 +81,7 @@ class App {
             ["Important", "Reference"],
             "Bank number xxx, branch xxxxx, account xxxxxxxx",
             new Date(Date.now())
-        ));
+        ));*/
     }
 
     public static function postMessage(message:WorkerMessage, data:Dynamic):Promise<Dynamic> {
