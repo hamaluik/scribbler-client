@@ -8,13 +8,13 @@ class SortToolbar implements Mithril {
         // TODO: sorting mode (ASC / DESC)
         return
         m('section.toolbar.has-text-centered', [
-            m('a.button.is-text.is-small', { href: '#!/sort/title' }, [
+            m('button.button.is-text.is-small[aria-label="sort by title"]', { onclick: function() {} }, [
                 m(Icon, {
                     glyph: "caret-up"
                 }),
                 m('b', 'Title')
             ]),
-            m('a.button.is-text.is-small', { href: '#!/sort/date' }, [
+            m('button.button.is-text.is-small[aria-label="sort by date"]', { onclick: function() {} }, [
                 m(Icon, {
                     glyph: "caret-down"
                 }),

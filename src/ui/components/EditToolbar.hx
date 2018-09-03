@@ -1,5 +1,7 @@
 package ui.components;
 
+import data.types.Note;
+import data.actions.NoteActions;
 import bulma.elements.Icon;
 import mithril.M;
 
@@ -25,7 +27,8 @@ class EditToolbar implements Mithril {
                 m('b', 'Edit')
             ]);
 
-        return if(exists)
+        return if(exists) {
+            var note:Note = App.store.getState().notes.get_unwrapped(id);
             m('section.toolbar', [
                 save_edit_btn,
                 m('a.button.is-text.is-small', { href: '#!/rename?id=${id}' }, [
@@ -35,12 +38,13 @@ class EditToolbar implements Mithril {
                     m('b', 'Rename')
                 ]),
                 m('button.button.is-text.is-small', { onclick: function() {
-                    App.console.debug('TODO: pin it!');
+                    App.store.dispatch(note.pinned ? NoteActions.UnPin(id) : NoteActions.Pin(id));
                 } }, [
                     m(Icon, {
-                        glyph: "thumbtack"
+                        glyph: "star",
+                        style: note.pinned ? 'far' : 'fas'
                     }),
-                    m('b', 'Pin')
+                    m('b', note.pinned ? 'Unpin' : 'Pin')
                 ]),
                 m('a.button.is-text.is-small', { href: '#!/delete?id=${id}' }, [
                     m(Icon, {
@@ -49,6 +53,7 @@ class EditToolbar implements Mithril {
                     m('b', 'Delete')
                 ]),
             ]);
+        }
         else null;
     }
 }
