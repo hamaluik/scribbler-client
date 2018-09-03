@@ -18,7 +18,7 @@ class Delete implements Mithril {
 
     public function render(vnode: Vnode<Delete>): Vnodes {
         var id:Null<String> = M.routeAttrs(vnode).get('id');
-        var note:Option<Note> = id == null ? None : App.store.getState().notes.get(id);
+        var note:Option<Note> = App.store.getState().notes.get(id);
 
         var rendered_html:String = switch(note) {
             case Some(n): App.markdown.render(n.note);

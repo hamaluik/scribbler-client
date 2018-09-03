@@ -8,4 +8,5 @@ typedef Note = {
     var lastModified:Date;
     var tags:Array<String>;
     var note:String;
+    var pinned:Bool;
 };
