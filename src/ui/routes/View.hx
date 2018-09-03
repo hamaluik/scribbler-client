@@ -26,7 +26,7 @@ class View implements Mithril {
         return [
             m('.is-fullheight', [
                 m('.columns.is-gapless', [
-                    m(ControlPane),
+                    m(ControlPane, { id: id }),
                     m('.column', [
                         m(NoteHeader, { id: id, editable: false }),
                         m(EditToolbar, { id: id, is_editing: false }),
