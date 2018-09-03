@@ -9,7 +9,7 @@ class ControlPane implements Mithril {
             m(Header),
             m(SearchTool),
             m(SortToolbar),
-            m(NoteList, { id: '42' }),
+            m(NoteList, { id: node.attrs.get('id') }),
         ]);
     }
 }

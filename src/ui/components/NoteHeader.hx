@@ -1,23 +1,26 @@
 package ui.components;
 
-import js.Date;
+import data.types.Note;
 import mithril.M;
 
 class NoteHeader implements Mithril {
     public static function view(node:Vnode<NoteHeader>): Vnodes {
-        var id:String = node.attrs.get('id');
-        // TODO: get data from the store
-        var title:String = "Lorem Ipsum";
-        var date:Date = new Date(Date.now());
-        var dateDisplay:String = date.toString();
-        var dateStamp:String = date.toISOString();
+        var id:Null<String> = node.attrs.get('id');
+        var note:Option<Note> = App.store.getState().notes.get(id);
+        var editable:Bool = node.attrs.get('editable');
 
-        return [
-            m('h1.title', title),
-            m('h2.subtitle', [
-                "Last modified ",
-                m('time', { datetime: dateStamp }, dateDisplay)
-            ]),
-        ];
+        return switch(note) {
+            case Some(n): [
+                m('header', [
+                    m('h1.title', n.title), // TODO: make editable
+                    m('h2.subtitle', [
+                        "Last modified ",
+                        m('time', { datetime: n.lastModified.toISOString() }, n.lastModified.toString())
+                    ]),
+                    m(TagList, { id: id, editable: editable })
+                ])
+            ];
+            case None: null;
+        };
     }
 }

@@ -1,5 +1,6 @@
 package ui.routes;
 
+import data.actions.NoteActions;
 import ui.components.Footer;
 import ui.components.EditToolbar;
 import ui.components.NoteHeader;
@@ -18,7 +19,7 @@ class Delete implements Mithril {
 
     public function render(vnode: Vnode<Delete>): Vnodes {
         var id:Null<String> = M.routeAttrs(vnode).get('id');
-        var note:Option<Note> = id == null ? None : App.store.getState().notes.get(id);
+        var note:Option<Note> = App.store.getState().notes.get(id);
 
         var rendered_html:String = switch(note) {
             case Some(n): App.markdown.render(n.note);
@@ -41,13 +42,29 @@ class Delete implements Mithril {
             ]),
             m(Footer),
             m('.modal.is-active', [
-                m('.modal-background[aria-label=close]', { onclick: function() { M.routeSet('#!/view?id=${id}'); } }),
+                m('.modal-background[aria-label=cancel]', { onclick: function() { M.routeSet('/view?id=${id}'); } }),
                 m('.modal-content', [
                     m('.box.content', [
-                        m('p', 'Are you sure you want to delete this note? This cannot be undone!')
+                        m("form", {
+                            onsubmit: function() {
+                                App.store.dispatch(NoteActions.Delete(id));
+                                M.routeSet('/view');
+                            },
+                            action: "#"
+                        }, [
+                            m('p', 'Are you sure you want to delete this note? This cannot be undone!'),
+                            m('.field.is-grouped.is-grouped-right', [
+                                m('.control', [
+                                    m('input.button[type=submit].is-danger', { value: 'Delete' })
+                                ]),
+                                m('.control', [
+                                    m('a.button.is-text[aria-label=cancel]', { onclick: function() { M.routeSet('/view?id=${id}'); } }, 'Cancel')
+                                ])
+                            ])
+                        ])
                     ])
                 ]),
-                m('button.modal-close.is-large[aria-label=close]', { onclick: function() { M.routeSet('#!/view?id=${id}'); } })
+                m('button.modal-close.is-large[aria-label=cancel]', { onclick: function() { M.routeSet('/view?id=${id}'); } })
             ])
         ];
     }

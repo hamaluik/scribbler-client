@@ -10,7 +10,11 @@ class NoteList implements Mithril {
         // TODO: apply filter
         notes.sort(function(a:Note, b:Note):Int {
             // TODO: use the sorting buttons
-            return Std.int(a.lastModified.getTime() - b.lastModified.getTime());
+            return switch([a.pinned, b.pinned]) {
+                case [true, false]: -1;
+                case [false, true]: 1;
+                case [_, _]: Std.int(b.lastModified.getTime() - a.lastModified.getTime());
+            }
         });
 
         var no_notes_notice:Vnodes = if(notes.length == 0) {
@@ -22,9 +26,6 @@ class NoteList implements Mithril {
         m('section.list', [for(note in notes)
             m(NoteInList, {
                 id: note.id,
-                title: note.title,
-                date: note.lastModified.toString(),
-                tags: note.tags,
                 selected: id != null && note.id == id
             })
         ], no_notes_notice);

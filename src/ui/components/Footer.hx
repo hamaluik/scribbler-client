@@ -19,7 +19,7 @@ class Footer implements Mithril {
             m('button.button.is-text.is-small', { onclick: function() {
                 App.console.debug('attempting sign out...');
                 api.Auth.signOut();
-                M.routeSet('#!/signin');
+                M.routeSet('/signin');
             } }, [
                 m(Icon, {
                     glyph: "sign-out-alt"

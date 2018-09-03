@@ -9,4 +9,6 @@ enum NoteActions {
     AddTag(id:String, newTag:String);
     RemoveTag(id:String, oldTag:String);
     Delete(id:String);
+    Pin(id:String);
+    UnPin(id:String);
 }

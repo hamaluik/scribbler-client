@@ -64,12 +64,28 @@ body
             
             h1, h2
                 color: white !important
+        
+            .content
+                position: relative
+
+            .icon
+                color: white !important
 
         a:hover
             background: $link-hover
             
             h1, h2
                 color: white !important
+        
+        .content
+            position: relative
+
+            .icon
+                display: block
+                position: absolute
+                top: 0.25em
+                right: 0.25em
+                color: $primary
 
 .columns
     max-width: 100%
@@ -111,8 +127,8 @@ header
     flex: 1
 
     textarea
-        width: 100%
-        min-height: 100%
+        width: 100% !important
+        min-height: 100% !important
         border: 0
         background: white
         padding: 1em
