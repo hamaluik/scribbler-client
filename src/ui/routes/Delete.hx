@@ -42,7 +42,7 @@ class Delete implements Mithril {
             ]),
             m(Footer),
             m('.modal.is-active', [
-                m('.modal-background[aria-label=close]', { onclick: function() { M.routeSet('/view?id=${id}'); } }),
+                m('.modal-background[aria-label=cancel]', { onclick: function() { M.routeSet('/view?id=${id}'); } }),
                 m('.modal-content', [
                     m('.box.content', [
                         m("form", {
@@ -58,13 +58,13 @@ class Delete implements Mithril {
                                     m('input.button[type=submit].is-danger', { value: 'Delete' })
                                 ]),
                                 m('.control', [
-                                    m('a.button.is-text[aria-label=close]', { onclick: function() { M.routeSet('/view?id=${id}'); } }, 'Cancel')
+                                    m('a.button.is-text[aria-label=cancel]', { onclick: function() { M.routeSet('/view?id=${id}'); } }, 'Cancel')
                                 ])
                             ])
                         ])
                     ])
                 ]),
-                m('button.modal-close.is-large[aria-label=close]', { onclick: function() { M.routeSet('/view?id=${id}'); } })
+                m('button.modal-close.is-large[aria-label=cancel]', { onclick: function() { M.routeSet('/view?id=${id}'); } })
             ])
         ];
     }
