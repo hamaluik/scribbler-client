@@ -26,6 +26,10 @@ class Edit implements Mithril {
             case None: "";
         });
 
+        note_contents.onChanged = Some(function(v:String):Void {
+            App.store.dispatch(NoteActions.Edit(id, v, new Date(Date.now())));
+        });
+
         return null;
     }
 
