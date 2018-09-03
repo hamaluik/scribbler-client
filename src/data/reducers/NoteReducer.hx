@@ -11,16 +11,16 @@ class NoteReducer implements redux.IReducer<NoteActions, IDMapState<Note>> {
         var blank:IDMapState<Note> = {};
         return switch(action) {
             case Create(id, title, tags, contents, created): {
-                var newNote:Note = {
+                var note:Note = {
                     id: id,
                     title: title,
                     lastModified: created,
                     tags: tags,
                     note: contents,
                 };
-                var newProject = {};
-                Reflect.setField(newProject, id, newNote);
-                js.Object.assign(blank, state, newProject);
+                var newNote = {};
+                Reflect.setField(newNote, id, note);
+                js.Object.assign(blank, state, newNote);
             }
 
             case Rename(id, newTitle): {
@@ -30,9 +30,17 @@ class NoteReducer implements redux.IReducer<NoteActions, IDMapState<Note>> {
             }
 
             case Edit(id, newContents, modified): {
-                // TODO: implement!
-                App.console.warn("Edit isn't implemented yet!");
-                js.Object.assign(blank, state);
+                // reject if we don't already exist
+                if(!state.exists(id)) {
+                    App.console.warn('tried to edit note with id ${id} but that note doesn\'t exist!');
+                    return state;
+                }
+                var note:Note = state.get_unwrapped(id);
+                note.note = newContents;
+                note.lastModified = modified;
+                var newNote = {};
+                Reflect.setField(newNote, id, note);
+                js.Object.assign(blank, state, newNote);
             }
 
             case AddTag(id, newTag): {

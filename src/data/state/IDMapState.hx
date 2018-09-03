@@ -11,6 +11,10 @@ abstract IDMapState<T>({}) from {} to {} {
             else Some(Reflect.field(this, Std.string(id)));
     }
 
+    inline public function get_unwrapped(id:String):T {
+        return Reflect.field(this, Std.string(id));
+    }
+
     inline public function getAll():Array<T> {
         return Reflect.fields(this).map(function(id:String):T {
             return Reflect.field(this, Std.string(id));

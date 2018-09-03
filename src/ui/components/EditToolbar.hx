@@ -8,12 +8,10 @@ class EditToolbar implements Mithril {
         var id:Null<String> = node.attrs.get('id');
         var is_editing:Bool = node.attrs.exists('is_editing') && node.attrs.get('is_editing');
         var exists:Bool = App.store.getState().notes.exists(id);
+        var save:Void->Void = node.attrs.get('onsave');
 
         var save_edit_btn:Vnodes = if(is_editing)
-            m('button.button.is-text.is-small', { onclick: function() {
-                App.console.debug('TODO: save the note!');
-                M.routeSet('#!/view?id=${id}');
-            } }, [
+            m('button.button.is-text.is-small', { onclick: save }, [
                 m(Icon, {
                     glyph: "save"
                 }),

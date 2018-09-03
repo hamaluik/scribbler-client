@@ -10,7 +10,7 @@ class NoteList implements Mithril {
         // TODO: apply filter
         notes.sort(function(a:Note, b:Note):Int {
             // TODO: use the sorting buttons
-            return Std.int(a.lastModified.getTime() - b.lastModified.getTime());
+            return Std.int(b.lastModified.getTime() - a.lastModified.getTime());
         });
 
         var no_notes_notice:Vnodes = if(notes.length == 0) {
