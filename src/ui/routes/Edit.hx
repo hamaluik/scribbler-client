@@ -31,7 +31,6 @@ class Edit implements Mithril {
 
     public function render(node: Vnode<Edit>): Vnodes {
         var id:Null<String> = M.routeAttrs(node).get('id');
-        var note:Option<Note> = App.store.getState().notes.get(id);
 
         return [
             m('.is-fullheight', [
@@ -41,9 +40,7 @@ class Edit implements Mithril {
                         m(NoteHeader, { id: id, editable: true }),
                         m(EditToolbar, { id: id, is_editing: true, onsave: function() {
                             App.store.dispatch(NoteActions.Edit(id, note_contents.value, new Date(Date.now())));
-                            M.routeSet('#!/view', {
-                                id: id
-                            });
+                            M.routeSet('/view?id=${id}');
                         } }),
                         m('section.editor', [
                             m(MarkdownEditor, {

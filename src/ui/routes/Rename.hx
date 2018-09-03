@@ -41,13 +41,13 @@ class Rename implements Mithril {
             ]),
             m(Footer),
             m('.modal.is-active', [
-                m('.modal-background[aria-label=close]', { onclick: function() { M.routeSet('#!/view?id=${id}'); } }),
+                m('.modal-background[aria-label=close]', { onclick: function() { M.routeSet('/view?id=${id}'); } }),
                 m('.modal-content', [
                     m('.box.content', [
                         m('p', 'Time to enter a new name:')
                     ])
                 ]),
-                m('button.modal-close.is-large[aria-label=close]', { onclick: function() { M.routeSet('#!/view?id=${id}'); } })
+                m('button.modal-close.is-large[aria-label=close]', { onclick: function() { M.routeSet('/view?id=${id}'); } })
             ])
         ];
     }

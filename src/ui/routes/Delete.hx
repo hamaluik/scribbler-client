@@ -41,13 +41,13 @@ class Delete implements Mithril {
             ]),
             m(Footer),
             m('.modal.is-active', [
-                m('.modal-background[aria-label=close]', { onclick: function() { M.routeSet('#!/view?id=${id}'); } }),
+                m('.modal-background[aria-label=close]', { onclick: function() { M.routeSet('/view?id=${id}'); } }),
                 m('.modal-content', [
                     m('.box.content', [
                         m('p', 'Are you sure you want to delete this note? This cannot be undone!')
                     ])
                 ]),
-                m('button.modal-close.is-large[aria-label=close]', { onclick: function() { M.routeSet('#!/view?id=${id}'); } })
+                m('button.modal-close.is-large[aria-label=close]', { onclick: function() { M.routeSet('/view?id=${id}'); } })
             ])
         ];
     }
