@@ -68,20 +68,7 @@ class App {
         });
 
         // add some dummy notes for testing
-        /*App.store.dispatch(NoteActions.Create(
-            "testid",
-            "Mom's Chilli",
-            ["Recipe", "Cooking"],
-            "Take you some **beans** and **tomatoes** and **beef** and make a _chilli_!",
-            new Date(Date.now())
-        ));
-        App.store.dispatch(NoteActions.Create(
-            "id2",
-            "Bank Details",
-            ["Important", "Reference"],
-            "Bank number xxx, branch xxxxx, account xxxxxxxx",
-            new Date(Date.now())
-        ));*/
+        var newID:String = api.Notes.createNote("Test");
     }
 
     public static function postMessage(message:WorkerMessage, data:Dynamic):Promise<Dynamic> {
