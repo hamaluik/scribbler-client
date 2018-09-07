@@ -7,7 +7,9 @@ import bulma.elements.Icon;
 import util.Ref;
 
 class SearchTool implements Mithril {
-    static var search_string:Ref<String> = new Ref<String>("");
+    static var search_string:Ref<String> = new Ref<String>("", function(query:String):Void {
+        App.store.dispatch(SortFilterActions.Filter(query));
+    });
 
     public static function view(node:Vnode<SearchTool>): Vnodes {
         return
