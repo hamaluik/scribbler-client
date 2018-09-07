@@ -7,8 +7,10 @@ class Icon implements Mithril {
         var style:Null<String> = node.attrs.get('style');
         if(style == null) style = 'fas';
         
-        return m("span.icon[aria-hidden]", [
-            m('i.${style}.fa-${node.attrs.get('glyph')}')
-        ]);
+        return m("span.icon[aria-hidden]", 
+            if(node.attrs.exists('glyph'))
+                m('i.${style}.fa-${node.attrs.get('glyph')}')
+            else null
+        );
     }
 }

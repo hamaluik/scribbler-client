@@ -9,11 +9,25 @@ class NoteList implements Mithril {
         var notes:Array<Note> = App.store.getState().notes.getAll();
         // TODO: apply filter
         notes.sort(function(a:Note, b:Note):Int {
-            // TODO: use the sorting buttons
             return switch([a.pinned, b.pinned]) {
                 case [true, false]: -1;
                 case [false, true]: 1;
-                case [_, _]: Std.int(b.lastModified.getTime() - a.lastModified.getTime());
+                case [_, _]: {
+                    switch(App.store.getState().sort.type) {
+                        case Date(direction): {
+                            switch(direction) {
+                                case Desc: Std.int(b.lastModified.getTime() - a.lastModified.getTime());
+                                case Asc: Std.int(a.lastModified.getTime() - b.lastModified.getTime());
+                            }
+                        }
+                        case Title(direction): {
+                            switch(direction) {
+                                case Desc: b.title.toLowerCase() < a.title.toLowerCase() ? 1 : -1;
+                                case Asc: a.title.toLowerCase() < b.title.toLowerCase() ? 1 : -1;
+                            }
+                        }
+                    }
+                }
             }
         });
 
