@@ -18,7 +18,6 @@ class SearchTool implements Mithril {
                 onsubmit: function() {
                     App.store.dispatch(SortFilterActions.Filter(search_string));
                 },
-                action: '#'
             }, [
                 m('.field.has-addons', [
                     m(TextField, {

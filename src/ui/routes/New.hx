@@ -49,7 +49,6 @@ class New implements Mithril {
                                 var new_id:String = api.Notes.createNote(new_title);
                                 M.routeSet('/edit?id=${new_id}');
                             },
-                            action: "#"
                         }, [
                             m('p', 'Please enter a title for this note:'),
                             m('.field', [

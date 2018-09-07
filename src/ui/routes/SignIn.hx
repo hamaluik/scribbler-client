@@ -77,7 +77,6 @@ class SignIn implements Mithril {
                                 m('.box.content', [
                                     m("form", {
                                         onsubmit: signIn,
-                                        action: "#"
                                     }, [
                                         m('h1', 'Scribbler: Sign In'),
                                         signup_display,
