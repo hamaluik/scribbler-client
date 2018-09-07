@@ -26,8 +26,8 @@ class RefObject<T> {
 }
 
 @:forward abstract Ref<T>(RefObject<T>) {
-    public inline function new(value:T)
-        this = new RefObject<T>(value);
+    public inline function new(value:T, ?onChanged:T->Void)
+        this = new RefObject<T>(value, onChanged);
 
     @:from static function ofConstant<T>(value:T):Ref<T>
         return new Ref(value);

@@ -33,14 +33,19 @@ class TextField implements Mithril {
             ]);
         else null;
 
+        var size:String = '';
+        if(vnode.attrs.exists('size')) {
+            size = '.is-' + vnode.attrs.get('size');
+        }
+
         return 
             m('.control${classes}', [
-                m("input.input", {
+                m('input.input${size}', {
                     type: type,
                     placeholder: vnode.attrs.get('placeholder'),
                     value: vnode.state.value,
-                    //oninput: M.withAttr('value', function(v:String):Void { vnode.state.value = v; value.set(v); }),
-                    onchange: M.withAttr('value', function(v:String):Void { vnode.state.value = v; value.set(v); }),
+                    oninput: M.withAttr('value', function(v:String):Void { vnode.state.value = v; value.set(v); }),
+                    //onchange: M.withAttr('value', function(v:String):Void { vnode.state.value = v; value.set(v); }),
                     readonly: vnode.attrs.get('readonly'),
                     disabled: vnode.attrs.get('disabled'),
                 }),
