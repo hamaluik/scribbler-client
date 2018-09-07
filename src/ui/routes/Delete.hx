@@ -50,7 +50,6 @@ class Delete implements Mithril {
                                 App.store.dispatch(NoteActions.Delete(id));
                                 M.routeSet('/view');
                             },
-                            action: "#"
                         }, [
                             m('p', 'Are you sure you want to delete this note? This cannot be undone!'),
                             m('.field.is-grouped.is-grouped-right', [

@@ -62,7 +62,6 @@ class Rename implements Mithril {
                                 App.store.dispatch(NoteActions.Rename(id, new_title));
                                 M.routeSet('/view?id=${id}');
                             },
-                            action: "#"
                         }, [
                             m('p', 'Please enter the new title for this note:'),
                             m('.field', [

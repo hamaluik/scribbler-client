@@ -82,7 +82,6 @@ class SignUp implements Mithril {
                                 m('.box.content', [
                                     m("form", {
                                         onsubmit: signUp,
-                                        action: "#"
                                     }, [
                                         m('h1', 'Scribbler: Sign Up'),
                                         m('.field', [
