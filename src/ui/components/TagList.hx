@@ -14,14 +14,16 @@ class TagList implements Mithril {
 
     static function parse_tags(tags:String, quit_if_no_sep:Bool=false):Void {
         if(quit_if_no_sep && tags.indexOf(",") == -1) return;
+
         tags = StringTools.trim(tags);
-        App.console.debug('Parsing tags', tags);
         if(tags.length < 1) return;
+
         if(current_note.match(None)) return;
         var note:Note = switch(current_note) {
             case Some(n): n;
             case _: null;
         }
+
         var new_tags:Array<String> = tags
             .split(",")
             // tidy the tags
@@ -29,10 +31,11 @@ class TagList implements Mithril {
             .filter(function(t:String):Bool { return t.length > 0; })
             // only add tags if they don't already exist
             .filter(function(t:String):Bool { return note.tags.indexOf(t) == -1; });
-        App.console.debug('Creating new tags', new_tags);
+
         for(tag in new_tags) {
             App.store.dispatch(NoteActions.AddTag(note.id, tag));
         }
+        
         tags_field.set("");
     }
 
@@ -49,7 +52,9 @@ class TagList implements Mithril {
                         [for(tag in n.tags) m('.control', [
                             m('.tags.has-addons', [
                                 m('a.tag.is-light', tag),
-                                m('a.tag.is-delete') // TODO: delete tag action
+                                m('a.tag.is-delete[role=button]', { onclick: function() {
+                                    App.store.dispatch(NoteActions.RemoveTag(id, tag));
+                                }})
                             ])
                         ])]
                     ),
