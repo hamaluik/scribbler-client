@@ -10,6 +10,7 @@ enum SortType {
     Date(direction:SortDirection);
 }
 
-typedef SortState = {
-    var type:SortType;
+typedef SortFilterState = {
+    var sort:SortType;
+    var filter:Option<String>;
 }

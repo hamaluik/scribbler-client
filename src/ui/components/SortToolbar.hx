@@ -1,12 +1,12 @@
 package ui.components;
 
-import data.actions.SortActions;
+import data.actions.SortFilterActions;
 import bulma.elements.Icon;
 import mithril.M;
 
 class SortToolbar implements Mithril {
     public static function view(node:Vnode<SortToolbar>): Vnodes {
-        var titleIcon:Vnodes = switch(App.store.getState().sort.type) {
+        var titleIcon:Vnodes = switch(App.store.getState().sortfilter.sort) {
             case Title(direction): {
                 switch(direction) {
                     case Asc: m(Icon, { glyph: "sort-up" });
@@ -15,7 +15,7 @@ class SortToolbar implements Mithril {
             }
             case _: m(Icon);
         }
-        var dateIcon:Vnodes = switch(App.store.getState().sort.type) {
+        var dateIcon:Vnodes = switch(App.store.getState().sortfilter.sort) {
             case Date(direction): {
                 switch(direction) {
                     case Asc: m(Icon, { glyph: "sort-up" });
@@ -28,16 +28,16 @@ class SortToolbar implements Mithril {
         return
         m('section.toolbar.has-text-centered', [
             m('button.button.is-text.is-small[aria-label="sort by title"]', { onclick: function() {
-                switch(App.store.getState().sort.type) {
+                switch(App.store.getState().sortfilter.sort) {
                     case Title(direction): {
                         switch(direction) {
-                            case Asc: App.store.dispatch(SortActions.SortByTitle(Desc));
-                            case Desc: App.store.dispatch(SortActions.SortByTitle(Asc));
+                            case Asc: App.store.dispatch(SortFilterActions.SortByTitle(Desc));
+                            case Desc: App.store.dispatch(SortFilterActions.SortByTitle(Asc));
                         }
                     }
 
                     case Date(_): {
-                        App.store.dispatch(SortActions.SortByTitle(Desc));
+                        App.store.dispatch(SortFilterActions.SortByTitle(Desc));
                     }
                 }
             } }, [
@@ -45,16 +45,16 @@ class SortToolbar implements Mithril {
                 m('b', 'Title')
             ]),
             m('button.button.is-text.is-small[aria-label="sort by date"]', { onclick: function() {
-                switch(App.store.getState().sort.type) {
+                switch(App.store.getState().sortfilter.sort) {
                     case Date(direction): {
                         switch(direction) {
-                            case Asc: App.store.dispatch(SortActions.SortByDate(Desc));
-                            case Desc: App.store.dispatch(SortActions.SortByDate(Asc));
+                            case Asc: App.store.dispatch(SortFilterActions.SortByDate(Desc));
+                            case Desc: App.store.dispatch(SortFilterActions.SortByDate(Asc));
                         }
                     }
 
                     case Title(_): {
-                        App.store.dispatch(SortActions.SortByDate(Desc));
+                        App.store.dispatch(SortFilterActions.SortByDate(Desc));
                     }
                 }
             } }, [
